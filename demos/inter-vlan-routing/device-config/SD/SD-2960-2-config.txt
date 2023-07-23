@@ -1,0 +1,70 @@
+enable
+configure terminal
+
+ip routing
+
+interface GigabitEthernet 0/1
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+exit
+
+enable
+configure terminal
+
+no ip domain-lookup
+hostname SD-2960-2
+
+username admin secret cisco
+    
+line console 0
+logging synchronous
+exit
+
+ip domain-name SD.ccna.com
+crypto key generate rsa
+1024
+    
+banner motd $Welcome to SD branch.$
+enable secret cisco
+
+line console 0
+password cisco
+login
+exit
+    
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+interface range fa 0/1-20
+shutdown
+
+interface fa0/24
+switchport mode access
+switchport access vlan 10
+
+interface fa0/23
+switchport mode access
+switchport access vlan 20
+
+interface fa0/22
+switchport mode access
+switchport access vlan 30
+
+interface fa0/21
+switchport mode access
+switchport access vlan 40
+
+ip default-gateway 40.33.10.1
+
+vtp mode client
+vtp domain SD
+
+end
+
+copy running-config startup-config

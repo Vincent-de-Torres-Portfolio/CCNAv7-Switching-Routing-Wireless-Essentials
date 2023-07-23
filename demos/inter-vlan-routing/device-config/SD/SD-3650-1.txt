@@ -1,0 +1,157 @@
+
+enable
+configure terminal
+
+ip routing 
+
+no ip domain-lookup
+hostname SD-3650-1
+
+username admin secret cisco
+    
+line console 0
+logging synchronous
+exit
+
+ip domain-name SD.ccna.com
+crypto key generate rsa
+1024
+    
+banner motd $Welcome to SD branch.$
+enable secret cisco
+
+line console 0
+password cisco
+login
+exit
+    
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+! ============================== !
+! VTP INTERFACE 
+! ============================== !
+
+vtp mode server
+vtp domain SD
+
+vlan 10
+name Management
+interface vlan 10
+no shutdown
+exit
+
+vlan 20
+name Server
+interface vlan 20
+no shutdown
+exit
+
+vlan 30
+name Admin
+interface vlan 30
+no shutdown
+exit
+
+vlan 40
+name Users
+interface vlan 40
+no shutdown
+exit
+
+vlan 50
+name Wireless
+interface vlan 50
+no shutdown
+exit
+
+
+! ============================== !
+! INTERFACE 
+! ============================== !
+
+enable
+configure terminal
+ip routing
+
+interface GigabitEthernet1/0/1
+no shutdown
+no switchport
+ip address 40.33.110.2 255.255.255.252
+
+interface GigabitEthernet1/0/24
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+interface Vlan10
+ip address 40.33.10.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan20
+ip address 40.33.20.1 255.255.252.0
+no shutdown
+exit
+
+interface Vlan30
+ip address 40.33.30.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan40
+ip address 40.33.40.1 255.255.248.0
+no shutdown
+exit
+
+interface Vlan50
+ip address 40.33.50.1 255.255.248.0
+no shutdown
+exit
+
+
+!---------------------------------------- !
+! DHCP                                    !
+!---------------------------------------- !
+
+ip dhcp excluded-address 40.33.10.1 40.33.10.100
+ip dhcp excluded-address 40.33.20.1 40.33.20.100
+ip dhcp excluded-address 40.33.30.1 40.33.30.100
+ip dhcp excluded-address 40.33.40.1 40.33.40.100
+ip dhcp excluded-address 40.33.50.1 40.33.50.100
+
+ip dhcp pool VLAN10
+network 40.33.10.0 255.255.255.0
+default-router 40.33.10.1
+dns-server 40.33.20.100
+exit
+
+ip dhcp pool VLAN20
+network 40.33.20.0 255.255.252.0
+default-router 40.33.20.1
+dns-server 40.33.20.100
+exit
+
+ip dhcp pool VLAN30
+network 40.33.30.0 255.255.255.0
+default-router 40.33.30.1
+dns-server 40.33.20.100
+exit
+
+ip dhcp pool VLAN40
+network 40.33.40.0 255.255.248.0
+default-router 40.33.40.1
+dns-server 40.33.20.100
+exit
+
+ip dhcp pool VLAN50
+network 40.33.50.0 255.255.248.0
+default-router 40.33.50.1
+dns-server 40.33.20.100
+exit
+
+ip route 0.0.0.0 0.0.0.0 G1/0/1

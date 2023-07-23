@@ -1,0 +1,102 @@
+
+enable
+configure terminal
+no ip domain-lookup
+hostname SF-1841
+username admin secret cisco
+    
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name SF.ccna.com
+crypto key generate rsa
+1024
+    
+banner motd $Welcome to SF branch.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+    
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+    
+service password-encryption
+
+interface range FastEthernet0/0-24
+shutdown
+
+interface Serial 0/1/0
+no shutdown
+ip address 40.100.0.10 255.255.255.252
+exit
+
+interface FastEthernet0/0
+no shutdown
+exit
+
+interface FastEthernet0/0.10
+encapsulation dot1Q 10
+ip address 40.44.10.1 255.255.255.0
+exit
+
+interface FastEthernet0/0.20
+encapsulation dot1Q 20
+ip address 40.44.20.1 255.255.252.0
+exit
+
+interface FastEthernet0/0.30
+encapsulation dot1Q 30
+ip address 40.44.30.1 255.255.255.0
+exit
+
+interface FastEthernet0/0.40
+encapsulation dot1Q 40
+ip address 40.44.40.1 255.255.248.0
+exit
+
+interface FastEthernet0/0.50
+encapsulation dot1Q 50
+ip address 40.44.50.1 255.255.248.0
+exit
+
+
+ip dhcp excluded-address 40.44.10.1 40.44.10.100
+ip dhcp excluded-address 40.44.20.1 40.44.20.100
+ip dhcp excluded-address 40.44.30.1 40.44.30.100
+ip dhcp excluded-address 40.44.40.1 40.44.40.100
+ip dhcp excluded-address 40.44.50.1 40.44.50.100
+
+ip dhcp pool VLAN10
+network 40.44.10.0 255.255.255.0
+default-router 40.44.10.1
+dns-server 40.44.20.100
+exit
+
+ip dhcp pool VLAN20
+network 40.44.20.0 255.255.252.0
+default-router 40.44.20.1
+dns-server 40.44.20.100
+exit
+
+ip dhcp pool VLAN30
+network 40.44.30.0 255.255.255.0
+default-router 40.44.30.1
+dns-server 40.44.20.100
+exit
+
+ip dhcp pool VLAN40
+network 40.44.40.0 255.255.248.0
+default-router 40.44.40.1
+dns-server 40.44.20.100
+exit
+
+ip dhcp pool VLAN50
+network 40.44.50.0 255.255.248.0
+default-router 40.44.50.1
+dns-server 40.44.20.100
+exit

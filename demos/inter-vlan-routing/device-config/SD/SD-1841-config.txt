@@ -1,0 +1,48 @@
+
+enable
+configure terminal
+no ip domain-lookup
+hostname SD-1841
+username admin secret cisco
+
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name SD.ccna.com
+crypto key generate rsa
+1024
+
+banner motd $Welcome to SD branch.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+
+end
+enable
+configure terminal
+
+interface Se 0/1/0
+no shutdown
+ip address 40.33.100.2 255.255.255.252
+
+interface Fa 0/0
+no shutdown
+ip address 40.33.110.1 255.255.255.252
+
+end
+copy run start
+ip route 0.0.0.0 0.0.0.0 Se 0/1/0
+no ip route 40.33.0.0 255.255.0.0 Fa0/0
+ip route 40.33.0.0 255.255.248.0 40.33.110.2
+

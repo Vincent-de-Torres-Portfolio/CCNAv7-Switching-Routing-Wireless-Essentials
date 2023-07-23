@@ -1,0 +1,51 @@
+
+enable
+configure terminal
+no ip domain-lookup
+hostname DMZ-1841
+username admin secret cisco
+
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name DMZ.ccna.com
+crypto key generate rsa
+1024
+
+banner motd $Welcome to DMZ.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+end
+configure terminal
+interface FastEthernet0/0
+no shutdown
+ip address 40.80.80.1 255.255.255.0
+
+interface Serial0/0/0
+no shutdown
+ip address 200.100.123.2 255.255.255.252
+
+exit
+
+ip route 40.0.0.0 255.255.0.0 40.100.0.22
+ip route 40.22.0.0 255.255.0.0 40.100.0.22
+ip route 40.33.0.0 255.255.0.0 40.100.0.22
+ip route 40.44.0.0 255.255.0.0 40.100.0.22
+ip route 40.55.0.0 255.255.0.0 40.100.0.22
+ip route 0.0.0.0 0.0.0.0 200.100.123.1
+
+
+end
+copy run start

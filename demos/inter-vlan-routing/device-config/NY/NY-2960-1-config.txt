@@ -1,0 +1,58 @@
+enable
+configure terminal
+
+
+exit
+
+enable
+configure terminal
+
+no ip domain-lookup
+hostname NY-2960-1
+
+username admin secret cisco
+    
+line console 0
+logging synchronous
+exit
+
+ip domain-name NY.ccna.com
+crypto key generate rsa
+1024
+    
+banner motd $Welcome to SF branch.$
+enable secret cisco
+
+line console 0
+password cisco
+login
+exit
+    
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+interface range fa 0/1-24
+shutdown
+
+interface GigabitEthernet 0/1
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+interface FastEthernet 0/1
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+ip default-gateway 40.55.10.1
+
+vtp mode client
+vtp domain SF
+
+end
+
+copy running-config startup-config

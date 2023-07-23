@@ -1,0 +1,120 @@
+! ============================== !
+! VTP INTERFACE 
+! ============================== !
+
+vtp mode server
+vtp domain LA
+
+vlan 10
+name Management
+interface vlan 10
+no shutdown
+exit
+
+vlan 20
+name Server
+interface vlan 20
+no shutdown
+exit
+
+vlan 30
+name Admin
+interface vlan 30
+no shutdown
+exit
+
+vlan 40
+name Users
+interface vlan 40
+no shutdown
+exit
+
+vlan 50
+name Wireless
+interface vlan 50
+no shutdown
+exit
+
+
+! ============================== !
+! INTERFACE 
+! ============================== !
+
+enable
+configure terminal
+
+interface GigabitEthernet1/0/1
+no shutdown
+no switchport
+ip address 40.22.110.2 255.255.255.252
+
+interface GigabitEthernet1/0/24
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+interface Vlan10
+ip address 40.22.0.10 255.255.255.0
+no shutdown
+exit
+
+interface Vlan20
+ip address 40.22.20.1 255.255.252.0
+no shutdown
+exit
+
+interface Vlan30
+ip address 40.22.30.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan40
+ip address 40.22.40.1 255.255.248.0
+no shutdown
+exit
+
+interface Vlan50
+ip address 40.22.50.1 255.255.248.0
+no shutdown
+exit
+
+
+!---------------------------------------- !
+! DHCP                                    !
+!---------------------------------------- !
+
+ip dhcp excluded-address 40.22.10.1 40.22.10.100
+ip dhcp excluded-address 40.22.20.1 40.22.20.100
+ip dhcp excluded-address 40.22.30.1 40.22.30.100
+ip dhcp excluded-address 40.22.40.1 40.22.40.100
+ip dhcp excluded-address 40.22.50.1 40.22.50.100
+
+ip dhcp pool VLAN10
+network 40.22.10.0 255.255.255.0
+default-router 40.22.10.1
+dns-server 40.22.20.100
+exit
+
+ip dhcp pool VLAN20
+network 40.22.20.0 255.255.252.0
+default-router 40.22.20.1
+dns-server 40.22.20.100
+exit
+
+ip dhcp pool VLAN30
+network 40.22.30.0 255.255.255.0
+default-router 40.22.30.1
+dns-server 40.22.20.100
+exit
+
+ip dhcp pool VLAN40
+network 40.22.40.0 255.255.248.0
+default-router 40.22.40.1
+dns-server 40.22.20.100
+exit
+
+ip dhcp pool VLAN50
+network 40.22.50.0 255.255.248.0
+default-router 40.22.50.1
+dns-server 40.22.20.100
+exit

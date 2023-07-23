@@ -1,0 +1,173 @@
+
+enable
+configure terminal
+no ip domain-lookup
+hostname HQ-3650
+username admin secret cisco
+
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name HQ.ccna.com
+crypto key generate rsa
+1024
+
+banner motd $Welcome to HQ branch.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+vtp mode server
+vtp domain HQ
+
+
+vlan VLAN10
+name Management
+interface vlan 10
+no shutdown
+
+vlan VLAN20
+name Server
+interface vlan 20
+no shutdown
+
+vlan VLAN30
+name Admin
+interface vlan 30
+no shutdown
+
+vlan VLAN40
+name Users
+interface vlan 40
+no shutdown
+
+vlan VLAN50
+name Wireless
+interface vlan 50
+no shutdown
+
+interface range GigabitEthernet01/0/22-24
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+interface GigabitEthernet1/1/1
+no shutdown
+no switchport
+ip address 40.100.0.18 255.255.255.252
+
+
+interface GigabitEthernet1/1/2
+no shutdown
+no switchport
+ip address 40.100.0.22 255.255.255.252
+
+ip dhcp excluded-address 40.0.1.1 40.0.10.100
+ip dhcp excluded-address 40.0.10.1 40.0.10.100
+ip dhcp excluded-address 40.0.20.1 40.0.20.100
+ip dhcp excluded-address 40.0.30.1 40.0.30.100
+ip dhcp excluded-address 40.0.40.1 40.0.40.100
+ip dhcp excluded-address 40.0.50.1 40.0.50.100
+
+
+ip dhcp pool VLAN1
+network 40.0.1.0 255.255.255.0
+default-router 40.0.1.1
+dns-server 40.0.20.100
+exit
+
+ip dhcp pool VLAN10
+network 40.0.10.0 255.255.255.0
+default-router 40.0.10.1
+dns-server 40.0.20.100
+exit
+
+ip dhcp pool VLAN20
+network 40.0.20.0 255.255.252.0
+default-router 40.0.20.1
+dns-server 40.0.20.100
+exit
+
+ip dhcp pool VLAN30
+network 40.0.30.0 255.255.255.0
+default-router 40.0.30.1
+dns-server 40.0.20.100
+exit
+
+ip dhcp pool VLAN40
+network 40.0.40.0 255.255.248.0
+default-router 40.0.40.1
+dns-server 40.0.20.100
+exit
+
+ip dhcp pool VLAN50
+network 40.0.50.0 255.255.248.0
+default-router 40.0.50.1
+dns-server 40.0.20.100
+exit
+
+end
+
+
+enable
+configure terminal
+
+ip routing
+
+
+interface GigabitEthernet1/1/1
+no shutdown
+no switchport
+ip address 40.0.110.2 255.255.255.252
+
+interface GigabitEthernet1/0/24
+no shutdown
+switchport mode trunk
+switchport trunk allowed vlan 10,20,30,40,50
+
+
+interface Vlan1
+ip address 40.0.1.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan10
+ip address 40.0.10.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan20
+ip address 40.0.20.1 255.255.252.0
+no shutdown
+exit
+
+interface Vlan30
+ip address 40.0.30.1 255.255.255.0
+no shutdown
+exit
+
+interface Vlan40
+ip address 40.0.40.1 255.255.248.0
+no shutdown
+exit
+
+interface Vlan50
+ip address 40.0.50.1 255.255.248.0
+no shutdown
+exit
+
+ip route 0.0.0.0 0.0.0.0 40.100.0.21
+ip route 40.33.0.0 255.255.0.0 40.100.0.17
+ip route 40.22.0.0 255.255.0.0 40.100.0.17
+ip route 40.44.0.0 255.255.0.0 40.100.0.17
+ip route 40.55.0.0 255.255.0.0 40.100.0.17

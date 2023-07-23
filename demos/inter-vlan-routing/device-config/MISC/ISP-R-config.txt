@@ -1,0 +1,51 @@
+
+enable
+configure terminal
+no ip domain-lookup
+hostname ISP-R
+username admin secret cisco
+
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name ISP.ccna.com
+crypto key generate rsa
+1024
+
+banner motd $Welcome to ISP.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+end
+configure terminal
+
+
+interface Serial0/0/0
+no shutdown
+ip address 200.100.123.1 255.255.255.252
+
+interface lo1
+ip address 1.1.1.1 255.255.255.255
+int lo2
+ip address 2.2.2.2 255.255.255.255
+
+
+exit
+
+ip route 40.0.0.0 255.0.0.0 200.100.123.2
+
+
+
+end
+copy run start

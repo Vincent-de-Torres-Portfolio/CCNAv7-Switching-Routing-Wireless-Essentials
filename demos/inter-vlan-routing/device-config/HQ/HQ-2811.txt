@@ -1,0 +1,61 @@
+ip route 40.0.0.0 255.255.0.0 40.100.0.18
+ip route 40.22.0.0 255.255.0.0 40.100.0.2
+ip route 40.33.0.0 255.255.0.0 40.100.0.6
+ip route 40.44.0.0 255.255.0.0 40.100.0.10
+ip route 40.55.0.0 255.255.0.0 40.100.0.14
+ip route 0.0.0.0 0.0.0.0 40.100.0.18
+
+
+enable
+configure terminal
+no ip domain-lookup
+hostname HQ-2811
+username admin secret cisco
+
+line console 0
+logging synchronous
+exit
+conf t
+ip domain-name HQ.ccna.com
+crypto key generate rsa
+1024
+
+banner motd $Welcome to HQ branch.$
+enable secret cisco
+line console 0
+password cisco
+login
+exit
+
+line vty 0 4
+login local
+transport input ssh
+ip ssh version 2
+
+service password-encryption
+
+
+
+interface Se 0/3/0
+no shutdown
+ip address 40.100.0.1 255.255.255.252
+exit
+
+interface Se 0/3/1
+no shutdown
+ip address 40.100.0.5 255.255.255.252
+exit
+
+interface Se 0/2/0
+no shutdown
+ip address 40.100.0.9 255.255.255.252
+exit
+
+interface Se 0/2/1
+no shutdown
+ip address 40.100.0.13 255.255.255.252
+exit
+
+interface GigabitEthernet0/0/0
+no shutdown
+ip address 40.100.0.17 255.255.255.252

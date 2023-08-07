@@ -1,0 +1,38 @@
+
+
+
+conf t
+!
+interface GigabitEthernet1/0/24
+ no shutdown
+ no switchport
+ ip address 172.20.100.6 255.255.255.252
+!
+interface GigabitEthernet1/1/1
+ no shutdown
+ no switchport
+ ip address 172.20.100.10 255.255.255.252
+!
+interface GigabitEthernet1/0/2
+ no shutdown
+ no switchport
+ ip address 172.20.100.25 255.255.255.252
+!
+interface GigabitEthernet1/0/1
+ no shutdown
+ no switchport
+ ip address 172.20.100.21 255.255.255.252
+!
+
+ 
+ router ospf 1
+ router-id 22.22.22.22
+ passive-interface default
+ no passive-interface GigabitEthernet1/0/24
+ no passive-interface GigabitEthernet1/1/1
+ no passive-interface GigabitEthernet1/0/2
+ no passive-interface GigabitEthernet1/0/1
+no network 173.20.100.0 0.0.0.255 area 0
+
+ network 172.20.100.0 0.0.0.255 area 0
+ 

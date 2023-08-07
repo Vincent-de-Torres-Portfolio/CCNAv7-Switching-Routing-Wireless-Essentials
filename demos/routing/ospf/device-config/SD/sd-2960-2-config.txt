@@ -1,0 +1,14 @@
+interface FastEthernet0/3
+ switchport mode access
+ switchport access vlan 50
+
+interface FastEthernet0/4
+ switchport mode access
+ switchport access vlan 60
+
+interface FastEthernet0/5
+ switchport mode access
+ switchport access vlan 70
+
+interface range FastEthernet0/6 - 24
+shutdown

@@ -1,4 +1,5 @@
 # OSPF Network Project
+![ospf-topology](ospf.png)
 
 Welcome to the Multi-Site Network Configuration Project! This project aims to demonstrate various essential networking skills and concepts, providing a robust, scalable, and redundant network infrastructure. Below is an overview of the skills and concepts highlighted throughout the project:
 

@@ -48,6 +48,8 @@ router eigrp 1
  no passive-interface GigabitEthernet1/0/22
  no passive-interface GigabitEthernet1/1/1
  no passive-interface GigabitEthernet1/1/2
+  no passive-interface GigabitEthernet1/1/3
+no passive-interface GigabitEthernet1/1/4
 
   ! GigabitEthernet1/0/1
   network 10.100.0.20 0.0.0.3   
@@ -59,8 +61,25 @@ router eigrp 1
  network 10.100.0.37 0.0.0.3   
  ! GigabitEthernet1/1/2
  network 10.100.0.41 0.0.0.3   
+  network 10.100.100.4 0.0.0.3
+  network 10.100.100.16 0.0.0.3
  exit
 
 end
 
 write memory
+
+
+
+ configure terminal
+interface GigabitEthernet1/1/3
+no switchport
+ip address 10.100.100.6 255.255.255.252
+no shutdown
+exit
+interface GigabitEthernet1/1/4
+no switchport
+
+ip address 10.100.100.18 255.255.255.252
+no shutdown
+exit

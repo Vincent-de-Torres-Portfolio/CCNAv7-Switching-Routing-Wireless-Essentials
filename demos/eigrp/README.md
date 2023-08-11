@@ -274,6 +274,77 @@ network 212.20.20.128 0.0.0.7
 
 This walkthrough provides a high-level overview of the configuration steps for the described network setup. It's important to consult the official documentation for your specific device models and adapt the commands accordingly. Additionally, ensure that you thoroughly test each component to ensure proper functionality and connectivity.
 
+Certainly! Here's the continuation of your README file with the added basic configuration commands for secure device management:
+
+
+## **Basic Configuration**
+
+After setting up the IP addressing, VLANs, and other network-related configurations, it's essential to implement basic security and management settings on your devices. The following steps outline the basic configurations that should be applied to each network device for enhanced security and streamlined management.
+
+1. **Enable Enhanced Security:**
+
+    ```bash
+    enable
+    configure terminal
+    no ip domain-lookup
+    hostname {hostname}
+    username admin secret {static_pass}
+    ```
+
+    Replace `{hostname}` with the desired hostname for the device and `{static_pass}` with a strong password for the admin user.
+
+2. **Console Line Configuration:**
+
+    ```bash
+    line console 0
+    logging synchronous
+    exit
+    ```
+
+3. **Enable SSH and RSA Key Generation:**
+
+    ```bash
+    conf t
+    ip domain-name {site}.synapsetechnologies.com
+    crypto key generate rsa
+    1024
+    ```
+
+    Specify `{site}` as the name of your site or organization.
+
+4. **Banner and Enable Secret:**
+
+    ```bash
+    banner motd ${motd}$
+    enable secret {static_pass}
+    ```
+
+    Replace `{motd}` with a message of the day and `{static_pass}` with a strong enable secret password.
+
+5. **Console Line Password and Login Configuration:**
+
+    ```bash
+    line console 0
+    password {static_pass}
+    login
+    exit
+    ```
+
+6. **VTY Line Configuration for SSH:**
+
+    ```bash
+    line vty 0 4
+    login local
+    transport input ssh
+    ip ssh version 2
+    ```
+
+7. **Password Encryption:**
+
+    ```bash
+    service password-encryption
+    ```
+
 ## **Detailed Configurations**
 
 For detailed configurations of each device in the network, please refer to the individual Markdown files located in the "device-config" directory. Each Markdown file corresponds to a specific device and contains comprehensive step-by-step configuration instructions and commands.

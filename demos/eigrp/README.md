@@ -13,6 +13,8 @@ To fulfill the objectives, we will design and configure a network architecture w
 
 ## **Network Topology**
 
+![network-diagram](eigrp.png)
+
 The network will be composed of four main sites: HQ-B1, HQ-B2, HQ-B3, and HQ-B4. Each site will have its own 3650 switch for inter-VLAN routing and DHCP services. The access switches (2960) will connect to the 3650 switches through LACP-configured EtherChannels for redundancy and increased bandwidth. The core switches (Core 1 and Core 2) will provide connectivity between sites.
 
 **Configuration Highlights**:

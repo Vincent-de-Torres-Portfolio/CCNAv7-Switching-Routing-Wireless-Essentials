@@ -1,6 +1,48 @@
+# HQ-3650-B4 Configuration
+
+### Basic Settings
+
+```cisco
 enable
 configure terminal
 
+! Disable DNS lookup and set hostname
+no ip domain-lookup
+hostname HQ-3650-B4
+
+! Create admin user
+username admin secret cisco
+
+! Configure console settings
+line console 0
+ logging synchronous
+ exit
+
+! Configure domain name and generate RSA key
+conf t
+ ip domain-name hqbranch.synapsetechnologies.com
+ crypto key generate rsa general-keys modulus 1024
+
+! Set banner message and enable secret
+banner motd $Welcome to HQ Branch.$
+ enable secret cisco
+
+! Configure console password
+line console 0
+ password cisco
+ login
+ exit
+
+! Configure SSH for remote management
+line vty 0 4
+ login local
+ transport input ssh
+ ip ssh version 2
+```
+
+### VLAN Interfaces and IP Addresses
+
+```cisco
 interface Vlan10
  ip address 10.4.10.1 255.255.255.0
  exit
@@ -42,7 +84,11 @@ interface GigabitEthernet1/1/1
 end
 
 write memory
+```
 
+### VTP and VLAN Configuration
+
+```cisco
 end
 
 write memory
@@ -64,8 +110,11 @@ vlan 60
  name WL-STF
 vlan 70
  name WL-GST
+```
 
+### Interface and Port-Channel Configuration
 
+```cisco
  enable
 configure terminal
 
@@ -75,23 +124,20 @@ interface range GigabitEthernet1/0/1 - 2
   switchport trunk allowed vlan 10,20,30,40,50,60,70
     channel-group 1 mode active
 
-
 interface Port-channel1
   switchport mode trunk
   switchport trunk native vlan 10
   switchport trunk allowed vlan 10,20,30,40,50,60,70
   exit
 
-<!-- interface Vlan20
- ip address 10.4.20.110 255.255.255.0
- exit -->
-
 end
 
-copy running start
+copy running-config startup-config
+```
 
+### DHCP Pool Configuration
 
-
+```cisco
 enable
 configure terminal
 
@@ -140,7 +186,11 @@ ip dhcp excluded-address 10.4.70.1 10.4.70.100
 end
 
 write memory
+```
 
+### EIGRP Routing Configuration
+
+```cisco
 enable
 configure terminal
 ip routing 
@@ -158,4 +208,6 @@ router eigrp 1
 end
 
 write memory
+
+```
 

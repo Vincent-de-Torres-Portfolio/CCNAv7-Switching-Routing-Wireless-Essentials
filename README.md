@@ -18,7 +18,9 @@ The "demos" directory contains practical examples and configurations that showca
 
 List of Demos:
 
--  [Demo 1: Troubleshooting Inter-VLAN Routing](/demos/inter-vlan-routing)
+-  [Demo 1: Inter-VLAN Routing](/demos/inter-vlan-routing)
+-  [Demo 2: OSPF](/demos/ospf)
+-  [Demo 3: EIGRP](/demos/eigrp)
 
 
 ## Lectures

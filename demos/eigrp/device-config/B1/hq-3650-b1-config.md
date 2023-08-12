@@ -1,7 +1,9 @@
-! HQ-3650-B1
-!---------------------------------------------------------------------------
-! Enable and configure basic settings
-!---------------------------------------------------------------------------
+
+# HQ-3650-B1
+
+## Enable and Configure Basic Settings
+
+```cisco
 enable
 configure terminal
 
@@ -37,10 +39,11 @@ line vty 0 4
  login local
  transport input ssh
  ip ssh version 2
+```
 
-!---------------------------------------------------------------------------
-! Configure VLAN interfaces
-!---------------------------------------------------------------------------
+## Configure VLAN Interfaces
+
+```cisco
 configure terminal
 
 interface Vlan10
@@ -52,10 +55,11 @@ interface Vlan10
 end
 
 write memory
+```
 
-!---------------------------------------------------------------------------
-! Configure VTP settings and VLANs
-!---------------------------------------------------------------------------
+## Configure VTP Settings and VLANs
+
+```cisco
 vtp mode server
 vtp domain HQ-B1
 
@@ -73,10 +77,11 @@ vlan 60
  name WL-STF
 vlan 70
  name WL-GST
+```
 
-!---------------------------------------------------------------------------
-! Configure EtherChannel for trunk links
-!---------------------------------------------------------------------------
+## Configure EtherChannel for Trunk Links
+
+```cisco
 configure terminal
 
 interface range GigabitEthernet0/1 - 2
@@ -86,21 +91,20 @@ interface range GigabitEthernet0/1 - 2
  switchport trunk native vlan 10
  switchport trunk allowed vlan 10,20,30,40,50,60,70
 
-! Configure port-channel for trunk
 int po1
  switchport mode trunk
  switchport trunk native vlan 10
  switchport trunk allowed vlan 10,20,30,40,50,60,70
 
-! Configure VLAN 20 IP address
 int vlan 20 
  ip address 10.1.20.110 255.255.255.0
 
 end
+```
 
-!---------------------------------------------------------------------------
-! Configure DHCP pools for each VLAN
-!---------------------------------------------------------------------------
+## Configure DHCP Pools for Each VLAN
+
+```cisco
 configure terminal
 
 (ip dhcp pool configurations for each VLAN pool)
@@ -108,10 +112,11 @@ configure terminal
 end
 
 write memory
+```
 
-!---------------------------------------------------------------------------
-! Configure EtherChannel for trunk links on another set of interfaces
-!---------------------------------------------------------------------------
+## Configure EtherChannel for Trunk Links on Another Set of Interfaces
+
+```cisco
 configure terminal
 
 interface range GigabitEthernet 1/0/1 - 2
@@ -121,7 +126,6 @@ interface range GigabitEthernet 1/0/1 - 2
  switchport trunk native vlan 10
  switchport trunk allowed vlan 10,20,30,40,50,60,70
 
-! Configure port-channel for trunk
 int po1
  switchport mode trunk
  switchport trunk native vlan 10
@@ -129,3 +133,17 @@ int po1
 
 end
 ```
+
+## Shutdown Unused Ports
+
+To improve security and optimize network performance, it's recommended to shut down unused ports. Here's how you can do it:
+
+```cisco
+enable
+configure terminal
+
+! Shutdown unused GigabitEthernet ports
+interface range GigabitEthernet1/0/3 - 21,GigabitEthernet1/0/23-24, GigabitEthernet1/1/2 - 4
+shutdown
+```
+

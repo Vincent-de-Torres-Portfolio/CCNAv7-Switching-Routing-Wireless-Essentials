@@ -2,57 +2,57 @@
 
 
 ![cert-image](assets/imgs/netacad-ccnav7-routing-and-switching-essentials.png)
-## Welcome to My CCNAv7 Portfolio!
+# CCNAv7: Networking Portfolio
 
-Dear Employers and CCNA Students,
+Hello, Employers and CCNA Enthusiasts,
 
-Thank you for visiting my CCNAv7: Switching, Routing, and Wireless Essentials Showcase repository. Here, I demonstrate my achievements and expertise in networking concepts. This README provides an overview of the repository's contents and how you can explore the demos and lecture materials to get a glimpse of my skills.
+Thank you for visiting my CCNAv7: Switching, Routing, and Wireless Essentials Portfolio repository. Here, I proudly present my accomplishments and expertise in the realm of networking. This README serves as a guide to navigating the repository's contents, including demos and lecture materials, offering you a glimpse of my capabilities.
 
-## About
+## About Me
 
-This repository serves as a demonstration of my commitment to continuous learning and professional growth in the field of networking. I have successfully completed the CCNAv7 course, gaining valuable knowledge and hands-on experience.
+Within this repository, I showcase my unwavering dedication to continuous learning and professional advancement in the dynamic field of networking. I have successfully completed the CCNAv7 course, which has empowered me with substantial knowledge and hands-on experience.
 
-## Demos
+## Demos 🚀
 
-The "demos" directory contains practical examples and configurations that showcase my ability to perform specific networking tasks and effectively troubleshoot various scenarios. Feel free to explore the demos to see my skills in action.
+The "demos" directory is a treasure trove of practical examples and configurations that vividly demonstrate my prowess in executing specific networking tasks and adeptly resolving diverse scenarios. Explore the demos to witness my skills in action.
 
-List of Demos:
+| Demo | Description | Published |
+| ---- | ----------- | --------- |
+| [Access Control List](/demos/acl) | Implementing ACLs from a security perspective through traffic-filtering mechanism to safeguard network.| ❌ |
+| [Inter-VLAN Routing](/demos/inter-vlan-routing) | Configuration and troubleshooting of Inter-VLAN routing | ✅ |
+| [OSPF](/demos/ospf) | Open Shortest Path First (OSPF) protocol configuration | ✅ |
+| [EIGRP](/demos/eigrp) | Enhanced Interior Gateway Routing Protocol (EIGRP) configuration | ✅ |
+| [RIPv2](/demos/ripv2) | Routing Information Protocol Version 2 (RIPv2) setup | ✅ |
 
--  [Demo 1: Inter-VLAN Routing](/demos/inter-vlan-routing)
--  [Demo 2: OSPF](/demos/ospf)
--  [Demo 3: EIGRP](/demos/eigrp)
--  [Demo 4: RIPv2](/demos/ripv2)
-
-
-## Lectures
-
-The "Lectures" directory includes notes, slides, and supplemental documentation related to the major topics covered in the CCNAv7 course. These materials demonstrate my theoretical understanding of networking concepts.
-
-List of Lectures:
-- Lecture 2:  VLAN & Inter-VLAN Routing
+(✅ = Published, ❌ = Work in Progress)
 
 
-## Certification
+## Certification 🏆
 
-I am proud to have earned my student credential CCNAv7 certification, demonstrating my proficiency in the following areas:
+I take immense pride in my CCNAv7 student credential, a testament to my proficiency in a range of networking areas, including but not limited to:
 
-1. VLAN configuration and Inter-VLAN routing with security best practices.
-2. Troubleshooting Inter-VLAN routing on Layer 3 devices.
-3. Configuring redundancy on a switched network using STP and EtherChannel.
-4. Troubleshooting EtherChannel on switched networks.
-5. Supporting available and reliable networks using dynamic addressing and first-hop redundancy protocols.
-6. Configuring dynamic address allocation in IPv6 networks.
-7. Configuring WLANs using a Wireless LAN Controller (WLC) and Layer 2 security best practices.
-8. Configuring switch security to mitigate LAN attacks.
-9. Configuring IPv4 and IPv6 static routing on routers.
+1. VLAN configuration and secure Inter-VLAN routing.
+2. Effective troubleshooting of Inter-VLAN routing on Layer 3 devices.
+3. Implementation of redundancy using STP and EtherChannel.
+4. Skillful resolution of EtherChannel issues in switched networks.
+5. Establishment of robust networks through dynamic addressing and first-hop redundancy protocols.
+6. Configuration of dynamic address allocation in IPv6 networks.
+7. Setup of WLANs using a Wireless LAN Controller (WLC) alongside Layer 2 security best practices.
+8. Deployment of switch security measures to mitigate LAN attacks.
+9. Configuration of IPv4 and IPv6 static routing on routers.
 
-## How to Use This Repository
+## Exploring This Repository 🕵️‍♂️
 
-As an employer or fellow CCNA student, you can explore the "Demos" and "Lectures" directories to gain insight into my networking capabilities. The demos provide hands-on evidence of my skills, while the lectures demonstrate my theoretical understanding.
+As an employer or fellow CCNA student, you're invited to delve into the "Demos" and "Lectures" sections for an in-depth understanding of my networking prowess. Demos offer hands-on evidence, while lectures underline my theoretical grasp.
 
-If you wish to know more about my certification or discuss potential opportunities, please don't hesitate to contact me using the information provided below.
+Feel free to reach out for additional insights regarding my certification or to discuss potential collaborations. Contact details can be found below.
 
-Thank you for considering my CCNAv7 Showcase. I look forward to the possibility of contributing my skills and knowledge to your organization.
+Thank you for considering my CCNAv7 Portfolio. I eagerly anticipate the prospect of contributing my knowledge and skills to your endeavors.
 
-## Licensing
-The contents of this repository are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are free to share and adapt the materials for any purpose, as long as appropriate credit is given to the original author (me).
+## Licensing 📜
+
+The contents of this repository are licensed under the Creative Commons Attribution 4.0 International License (CC BY 4.0). You are at liberty to share and adapt these materials for any purpose, provided proper credit is accorded to the original author (yours truly).
+
+---
+
+Feel free to get in touch with me via [email](mailto:vince.dev@icloud.com) or connect on [LinkedIn](https://www.linkedin.com/in/vdetorresit/). Your feedback and collaboration are highly appreciated!

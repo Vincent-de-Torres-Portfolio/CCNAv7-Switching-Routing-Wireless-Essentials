@@ -1,5 +1,6 @@
 # CCNAv7 II: ACL Skills Integration Demonstration
-
+## Neetwork Topology
+![network-topology](./acl.png)
 ## Network Security Policy
 
 ### 1. **Firewall_1841 Router - OUTBOUND ACL:**
